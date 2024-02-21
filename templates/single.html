@@ -23,10 +23,10 @@
 			<div class="container">
 				<ul class="w3_short">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="{% url 'product' %}">Store</a>
 						<i>|</i>
 					</li>
-					<li>Single Product 1</li>
+					<li>Product</li>
 				</ul>
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>S</span>ingle
+				<span>P</span>roduct
 				<span>P</span>age</h3>
 			<!-- //tittle heading -->
 			<div class="row">
@@ -57,8 +57,13 @@
 					</div>
 				</div>
 
-				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
-					<h3 class="mb-3">{{ single_product.product_name }}</h3>
+				
+           <div class="col-lg-7 single-right-left simpleCart_shelfItem">
+					
+			<form action="{% url 'add_cart' single_product.id %}" method="POST">
+				{% csrf_token %}
+					
+				<h3 class="mb-3">{{ single_product.product_name }}</h3>
 					<p class="mb-3">
 						<span class="item_price">$ {{ single_product.price }}</span>
 						
@@ -70,67 +75,52 @@
 						
 						<label>{{ single_product.description }}</label>
 					</p>
+                 <hr>
 					
-					<div class="single-infoagile">
-						<ul>
-							<li class="mb-3">
-								Cash on Delivery Eligible.
-							</li>
-							<li class="mb-3">
-								Shipping Speed to Delivery.
-							</li>
-							<li class="mb-3">
-								EMIs from $655/month.
-							</li>
-							<li class="mb-3">
-								Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
-							</li>
-						</ul>
-					</div>
-					<div class="product-single-w3l">
-						{% comment %} <p class="my-3">
-							<i class="far fa-hand-point-right mr-2"></i>
-							<label>1 Year</label>Manufacturer Warranty</p>
-						<ul>
-							<li class="mb-1">
-								3 GB RAM | 16 GB ROM | Expandable Upto 256 GB
-							</li>
-							<li class="mb-1">
-								5.5 inch Full HD Display
-							</li>
-							<li class="mb-1">
-								13MP Rear Camera | 8MP Front Camera
-							</li>
-							<li class="mb-1">
-								3300 mAh Battery
-							</li>
-							<li class="mb-1">
-								Exynos 7870 Octa Core 1.6GHz Processor
-							</li>
-						</ul>  {% endcomment %}
-						<p class="my-sm-4 my-3">
-							<i class="fas fa-retweet mr-3"></i>Net banking & Credit/ Debit/ ATM card
-						</p>
-					</div>
+					<div class="row ml-2">
+						<div class="item-option-select">
+							<h6>Choose Color</h6>
+							<select name="color" class="form-control mt-2" required>
+                                <option value="" disabled selected>Select</option>
+								{% for i in single_product.variation_set.colors %}
+								<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+								{% endfor %}
+							</select>
+							
+						</div>
+					</div> <!-- row.// -->
+					
+					<div class="row ml-2 mt-3">
+						<div class="item-option-select">
+							<h6>Select Size</h6>
+							<select name="size" class="form-control mt-2">
+								<option value="" disabled selected>Select</option>
+
+								{% for i in single_product.variation_set.sizes %}
+								<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+								{% endfor %}
+							</select>
+							
+						</div>
+					</div> <!-- row.// -->
+					<hr>
+
+
+					
+					
+					
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 							<form action="#" method="post">
-								<fieldset>
-									<input type="hidden" name="cmd" value="_cart" />
-									<input type="hidden" name="add" value="1" />
-									<input type="hidden" name="business" value=" " />
-									<input type="hidden" name="item_name" value="Samsung Galaxy J7 Prime" />
-									<input type="hidden" name="amount" value="200.00" />
-									<input type="hidden" name="discount_amount" value="1.00" />
-									<input type="hidden" name="currency_code" value="USD" />
-									<input type="hidden" name="return" value=" " />
-									<input type="hidden" name="cancel_return" value=" " />
+								
+									
 									{% if single_product.stock <= 0 %}
 									<h5 class="text-danger">Out of Stock</h5>
 									{% else %}
-									<input type="submit" name="submit" value="Add to cart" class="button" />
+									<button type="submit"  class="btn btn-primary"><span class="text">Add to Cart </span><i class="fas fa-shopping-cart"></i></button>
 									{% endif %}
-								</fieldset>
+								</form>
+								
 							</form>
 						</div>
 					</div>
