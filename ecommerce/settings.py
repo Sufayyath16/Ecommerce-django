@@ -142,3 +142,20 @@ MEDIA_ROOT = 'media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    # messages.INFO: "",
+    # 50: "critical",
+}
+
+#SMTP CONFIGURATION
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sufayyath@gmail.com'
+EMAIL_HOST_PASSWORD = 'bqbr gxni tesi jged'
+EMAIL_USE_TLS = True
+
+
