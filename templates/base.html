@@ -176,7 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li class="nav-item mr-lg-5 mb-lg-0 mb-2">
 							<a class="nav-link" href="{% url 'product' %}">Store</a>
 						</li>
-						<li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2">
+						{% comment %} <li class="nav-item dropdown mr-lg-5 mb-lg-0 mb-2">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Pages
 							</a>
@@ -186,7 +186,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<a class="dropdown-item" href="{% url 'checkout' %}">Checkout Page</a>
 								<a class="dropdown-item" href="{% url 'payment' %}">Payment Page</a>
 							</div>
-						</li>
+						</li> {% endcomment %}
 						<li class="nav-item">
 							<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
 						</li>
@@ -256,48 +256,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="col-md-3 col-sm-6 footer-grids">
 						<h3 class="text-white font-weight-bold mb-3">Categories</h3>
 						<ul>
-							<li class="mb-3">
-								<a href="product.html">Mobiles </a>
-							</li>
-							<li class="mb-3">
-								<a href="product.html">Computers</a>
-							</li>
-							<li class="mb-3">
-								<a href="product.html">TV, Audio</a>
-							</li>
-							<li class="mb-3">
-								<a href="product2.html">Smartphones</a>
-							</li>
-							<li class="mb-3">
-								<a href="product.html">Washing Machines</a>
-							</li>
-							<li>
-								<a href="product2.html">Refrigerators</a>
-							</li>
-						</ul>
-					</div>
+							<li class="mb-3"><a href="{% url 'product' %}" class="links">All Products</a></li>
+
+							{% for category in links %}
+									<li class="mb-3"><a href="{{ category.get_url }}" class="links">{{ category.category_name }}</a></li>
+							{% endfor %}
+							</ul>
+					</div> 
 					<!-- //footer categories -->
 					<!-- quick links -->
 					<div class="col-md-3 col-sm-6 footer-grids mt-sm-0 mt-4">
 						<h3 class="text-white font-weight-bold mb-3">Quick Links</h3>
 						<ul>
 							<li class="mb-3">
-								<a href="about.html">About Us</a>
+								<a href="{% url 'about' %}">About Us</a>
 							</li>
 							<li class="mb-3">
-								<a href="contact.html">Contact Us</a>
+								<a href="{% url 'contact' %}">Contact Us</a>
 							</li>
 							<li class="mb-3">
-								<a href="help.html">Help</a>
+								<a href="{% url 'help' %}">Help</a>
 							</li>
 							<li class="mb-3">
-								<a href="faqs.html">Faqs</a>
+								<a href="{% url 'faqs' %}">Faqs</a>
 							</li>
 							<li class="mb-3">
-								<a href="terms.html">Terms of use</a>
+								<a href="{% url 'terms' %}">Terms of use</a>
 							</li>
 							<li>
-								<a href="privacy.html">Privacy Policy</a>
+								<a href="{% url 'privacy' %}">Privacy Policy</a>
 							</li>
 						</ul>
 					</div>
@@ -373,45 +360,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li class="m-sm-1">
 							<a href="product.html" class="border-right pr-2">Offers & Coupons</a>
 						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Couple Watches</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Gas Stoves</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Air Coolers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Air Purifiers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Headphones</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2"> Headsets</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Pressure Cookers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Air Friers</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Irons</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">LED TV</a>
-						</li>
-						<li class="m-sm-1">
-							<a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-						</li>
-					</ul>
-				</div>
-				<!-- //brands -->
+
+						<li class="m-sm-1"><a href="{% url 'product' %}" class="links border-right pr-2">All Products</a></li>
+
+							{% for category in links %}
+							   <li class="m-sm-1"><a href="{{ category.get_url }}" class="links border-right pr-2">{{ category.category_name }}</a></li>
+							{% endfor %}
+									<!-- //brands -->
 				<!-- payment -->
 				<div class="sub-some child-momu mt-4">
 					<h5 class="font-weight-bold mb-3">Payment Method</h5>
@@ -528,7 +483,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //cart-js -->
 
 	<!-- password-script -->
-	<script>
+	 <script>
 		window.onload = function () {
 			document.getElementById("password1").onchange = validatePassword;
 			document.getElementById("password2").onchange = validatePassword;
@@ -543,7 +498,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				document.getElementById("password2").setCustomValidity('');
 			//empty string means no validation error
 		}
-	</script>
+	</script> 
 	<!-- //password-script -->
 	
 	<!-- scroll seller -->

@@ -18,19 +18,26 @@ def about(request):
 def contact(request):
     return render(request,"contact.html")
 
-def checkout(request):
-    return render(request,"checkout.html")
+def help(request):
+    return render(request,"help.html")
 
-def payment(request):
-    return render(request,"payment.html")
+def faqs(request):
+    return render(request,"faqs.html")
+
+def terms(request):
+    return render(request,"terms.html")
+
+def privacy(request):
+    return render(request,"privacy.html")
 
 
 
-def product2(request):
-    return render(request,"product2.html")
 
-def single(request):
-    return render(request,"single.html")
 
-def single2(request):
-    return render(request,"single2.html")
+
+
+
+
+
+
+
