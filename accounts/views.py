@@ -15,6 +15,13 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.urls import reverse
 
+from carts.views import _cart_id
+from carts.models import Cart
+from carts.models import CartItem
+
+import requests
+
+
 
 # Create your views here.
 
@@ -36,11 +43,11 @@ def register(request):
             #USER ACTIVATION
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
-            message = render_to_string('accounts/account_verification_email.html',{
+            message = render_to_string('accounts/account_verification_email.html',{  #renders a Django template to a string
                 'user': user,
                 'domain': current_site,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),  #unique identifier in activation links
+                'token': default_token_generator.make_token(user),   #used to verify the authenticity of the activation link.
     
             })
             to_email = email
@@ -55,6 +62,7 @@ def register(request):
     }
     return render(request,"accounts/register.html",context)
 
+
 def login(request):
     if request.method == "POST":
         email = request.POST['email']
@@ -62,10 +70,67 @@ def login(request):
 
         user = auth.authenticate(email=email, password=password)
 
-        if user is not None:
+        if user is not None:        # cart products should display for logged in users
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if  is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+
+                    #getting the product variation by cart id
+                    product_variation = []
+                    for item in cart_item:
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+
+
+                    # get the cart items from the user to access his product variations
+                    cart_item = CartItem.objects.filter(user=user)
+                    ex_var_list = []
+                    id = []
+                    for item in cart_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id.append(item.id)
+
+                        #product_variation = [1,2,3,4,6]
+                        #ex_var_list=[4,6,3,5]
+            #If the cart has items, it checks if any of the items in the user's cart have the same variations as the items in the session cart. 
+            #If a match is found, it updates the quantity of the existing item; otherwise, it adds the item to the user's cart.
+                    
+                    for pr in product_variation:
+                        if pr in ex_var_list:
+                            index = ex_var_list.index(pr)
+                            item_id = id[index]
+                            item = CartItem.objects.get(id=item_id)
+                            item.quantity += 1
+                            item.user = user
+                            item.save()
+                        else:
+                            cart_item = CartItem.objects.filter(cart=cart)
+                            for item in cart_item:
+                                item.user = user
+                                item.save()
+
+
+            except:
+                pass
             auth.login(request,user)
             messages.success(request, "You are now logged in")
-            return redirect('/accounts/dashboard/')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+               
+                # nex=/cart/checkout/
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
+
+            except:
+                return redirect('/accounts/dashboard/') # If the 'next' parameter is not present or there is an issue with parsing, it falls back to redirecting to the dashboard.
+
+
         else:
             messages.error(request,"Invalid login credentials")
             return redirect('/accounts/login/')
@@ -130,7 +195,7 @@ def forgotPassword(request):
     return render(request, 'accounts/forgotPassword.html')
 
 
-def resetpassword_validate(request, uidb64, token):
+def resetpassword_validate(request, uidb64, token):     #to decode.It happens while clicking the link in email
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = Account._default_manager.get(pk=uid)
