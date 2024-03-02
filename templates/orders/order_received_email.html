@@ -1,0 +1,13 @@
+{% autoescape off %}
+ {% comment %} this code sends a registration confirmation email with a unique activation link to the user. 
+ The link includes encoded user information (uid) and a token for security purposes, and it points to a view named 'activate' in the Django application. 
+ When the user clicks on this link, it typically triggers the activation of their account. {% endcomment %}
+
+ Hi {{user.first_name }},
+
+ YOUR ORDER HAS BEEN RECEIVED
+
+ Order Number: {{order.order_number}}
+ 
+
+{% endautoescape %}

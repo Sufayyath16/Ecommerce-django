@@ -8,6 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="zxx">
 
+
 <head>
 	<title>Electro Store Ecommerce Category Bootstrap Responsive Web Template | Home :: w3layouts</title>
 	<!-- Meta tag Keywords -->
@@ -15,15 +16,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta charset="UTF-8" />
 	<meta name="keywords" content="Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
 	/>
-	<script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
+     {% comment %} paypal script {% endcomment %}
 
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
+		 
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
@@ -44,6 +39,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
 	    rel="stylesheet">
 	<!-- //web fonts -->
+	
+<script src="https://www.paypal.com/sdk/js?client-id=AbVLe4ttCPUl_O2waYHRTxw4ZNuCr2Yuw-5lU5XP4WbWHEuHdXkQKPZh2DX3h6QQJNF33WFVXFZwWkDE&currency=USD"></script>
+
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script> 
+
+	
+
+    
+
+
     <style>
 	
     </style>
@@ -198,6 +211,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //navigation -->
 
     {% block content %}
+
     {% endblock %}
 
 
@@ -416,10 +430,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //copyright -->
 
+
+
 	<!-- js-files -->
 	<!-- jquery -->
 	<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>
 	<!-- //jquery -->
+
+
 
 	<!-- nav smooth scroll -->
 	<script>
@@ -548,6 +566,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
+
+	
+
+
 </body>
 
 </html>

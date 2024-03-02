@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,15 +38,19 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+    'orders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    
 ]
 
 MIDDLEWARE = [
+   
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,7 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
 ]
+
+
+
 
 ROOT_URLCONF = 'ecommerce.urls'
 
@@ -143,6 +152,8 @@ MEDIA_ROOT = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
@@ -157,5 +168,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sufayyath@gmail.com'
 EMAIL_HOST_PASSWORD = 'bqbr gxni tesi jged'
 EMAIL_USE_TLS = True
+
 
 
