@@ -199,7 +199,7 @@
 
 
 
-        createOrder: function(data, actions) {
+        createOrder: function(data, actions) {  //specifies a function that creates the order when the PayPal button is clicked.
           return actions.order.create({
             purchase_units: [{
               amount: {
@@ -210,7 +210,7 @@
         },
 
         //Finalize the transaction
-        onApprove: function(data, actions){
+        onApprove: function(data, actions){   //Specifies a function that is executed when the buyer approves the transaction.
           return actions.order.capture().then(function(details){
             //show a success message to the buyer
             console.log(details);

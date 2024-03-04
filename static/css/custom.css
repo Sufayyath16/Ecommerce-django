@@ -1,0 +1,90 @@
+/* hide radio button */
+.rate > input{
+    display: none;
+}
+
+.rate{
+    display: inline-block;
+    border: 0;
+}
+
+.rate > label{
+    float: right;
+
+}
+/* showing the stars */
+.rate > label:before{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin: 0;
+    /* padding: 0.3 rem 0.2 rem; */
+    padding: 5px 5px;
+    cursor: pointer;
+}
+
+
+/* half star */
+.rate .half:before{
+    content: "\f089";
+    position: absolute;
+    padding-right: 0;
+}
+
+/* click and hover */
+
+input:checked ~ label, label:hover ~ label{
+    color: #ffb503;
+}
+
+/* hover highlight */
+
+input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
+label:hover ~ input:checked ~ label{
+    color: #cc9000;
+}
+ 
+.rating-star i{
+    color: #ffb503 !important; 
+}
+
+
+/* Styles for the individual review boxes */
+.box {
+    border: 1px solid #ddd; /* Border color for each box */
+    padding: 15px; /* Padding within each box */
+    margin-bottom: 20px; /* Space between each box */
+  }
+
+  /* Styles for the review header within each box */
+.icontext {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Styles for the review date and username */
+.date {
+    color: #888; /* Adjust text color as needed */
+  }
+
+  
+/* Styles for the review rating within each box */
+.rating-star.review-rating span {
+    margin-right: 5px; /* Adjust as needed */
+  }
+
+  /* Additional styles for review title and content */
+.review-title {
+    font-size: 1.2em; /* Adjust title font size as needed */
+    margin-bottom: 5px; /* Space between title and content */
+  }
+
+  /* Clearfix to handle float alignment issues */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
