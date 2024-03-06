@@ -113,7 +113,8 @@
 					<div class="wrapper">
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">New Arrivals</h3>	
+							<h3 class="heading-tittle text-center font-italic">New Arrivals</h3>
+							
 							<div class="row">
 								{% for product in products %}
 								<div class="col-md-4 product-men mt-5">
@@ -134,6 +135,17 @@
 												<span class="item_price">$ {{ product.price }}</span>
 												
 											</div>
+											<div class="rating-star">
+												<span>
+													<i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+													<i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+													
+									
+												</span>
+											</div> <br>
 
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form action="#" method="post">{% csrf_token %}

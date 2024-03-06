@@ -19,8 +19,9 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('securelogin/', admin.site.urls),
     path('',include('ecommerce_app.urls')),
     path('product/',include('store.urls')),
     path('cart/',include('carts.urls')),

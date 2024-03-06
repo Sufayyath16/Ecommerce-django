@@ -81,21 +81,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<!-- header lists -->
 					<ul>
 						
-						<li class="text-center border-right text-white">
-							<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
-								<i class="fas fa-truck mr-2"></i>Track Order</a>
-						</li>
-						<li class="text-center border-right text-white">
-							<i class="fas fa-phone mr-2"></i> 001 234 5678
+						
+						<li class="text-center border-right text-white ml-lg-5">
+							<i class="fas fa-phone mr-2 "></i> 001 234 5678
 						</li>
                      
 
 						{% comment %} If the condition is true (user is not logged in), it displays two list items (<li>) with links to the login and registration pages. {% endcomment %}
 						{% if user.id is None %}
-						<li class="text-center border-right text-white">
+						<li class="text-center border-right text-white ">
 							<a class="text-white" href="{% url 'login' %}"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
 						</li>
-						<li class="text-center text-white">
+						<li class="text-center text-white ">
 							<a class="text-white" href="{% url 'register' %}"><i class="fas fa-sign-out-alt mr-2"></i>Register</a>
 						</li>
 
@@ -161,7 +158,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 				<div class="col-lg col-sm col-md col-6 flex-grow-0">
-					<div class="category-wrap dropdown d-inline-block float-right">
+					<div class="category-wrap dropdown d-inline-block float-right mr-5">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-bars"></i>  All Category</button>
 							<div class="dropdown-menu">
@@ -180,22 +177,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav ml-auto text-center mr-xl-5">
-						<li class="nav-item active mr-lg-5 mb-lg-0 mb-2">
-							<a class="nav-link" href="{% url 'home' %}">Home
+					<ul class="navbar-nav ml-auto text-center mr-5">
+						<li class="nav-item  mr-lg-5 mb-lg-0 mb-2">
+							<a class="nav-link {% if '/' == request.path  %}active{% endif %}" href="{% url 'home' %}">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
 						
 						<li class="nav-item mr-lg-5 mb-lg-0 mb-2">
-							<a class="nav-link" href="{% url 'about' %}">About Us</a>
+							<a class="nav-link {% if '/about/' in request.path  %}active{% endif %} " href="{% url 'about' %}">About Us</a>
 						</li>
 						<li class="nav-item mr-lg-5 mb-lg-0 mb-2">
-							<a class="nav-link" href="{% url 'product' %}">Store</a>
+							<a class="nav-link {% if '/product/' == request.path  %}active{% endif %}" href="{% url 'product' %}">Store</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-						</li>
+						
 					</ul>
 				</div>
 			</nav>
@@ -278,9 +273,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li class="mb-3">
 								<a href="{% url 'about' %}">About Us</a>
 							</li>
-							<li class="mb-3">
-								<a href="{% url 'contact' %}">Contact Us</a>
-							</li>
+							
 							<li class="mb-3">
 								<a href="{% url 'help' %}">Help</a>
 							</li>
