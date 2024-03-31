@@ -23,6 +23,8 @@ from carts.models import CartItem
 
 import requests
 
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
 # Create your views here.
@@ -168,7 +170,12 @@ def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
     
-    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    try:
+       userprofile = UserProfile.objects.get(user_id=request.user.id)
+    except ObjectDoesNotExist:
+        userprofile = UserProfile.objects.create(user=request.user)
+    
+
     context = {
         'orders_count': orders_count,
         'userprofile': userprofile,
@@ -259,12 +266,24 @@ def edit_profile(request):
         profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+
+            if 'profile_picture' in request.FILES:
+                profile_form.save()
+            else:
+                if userprofile.profile_picture:
+                    try:
+                        userprofile.profile_picture.delete()
+                    except Exception as e:
+                        pass  # Handle the exception as needed
+
+    
             messages.success(request, 'Your profile has been updated.')
             return redirect('edit_profile')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = UserProfileForm(instance=userprofile)
+    
+        
     context = {
         'user_form': user_form,
         'profile_form': profile_form,
